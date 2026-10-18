@@ -7,6 +7,8 @@ import PokedexScreen from './src/screens/PokedexScreen';
 import DetailScreen from './src/screens/DetailScreen';
 import TeamScreen from './src/screens/TeamScreen';
 import GameScreen from './src/screens/GameScreen';
+import { TeamProvider } from './src/context/TeamContext';
+import { colors } from './src/theme';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -15,6 +17,13 @@ function Tabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        tabBarActiveTintColor: colors.terracotta,
+        tabBarInactiveTintColor: colors.muted,
+        tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border, paddingTop: 5 },
+        tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+        headerStyle: { backgroundColor: colors.green },
+        headerTintColor: colors.surface,
+        headerTitleStyle: { fontWeight: '700', letterSpacing: 0.2 },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -30,7 +39,7 @@ function Tabs() {
         },
       })}
     >
-      <Tab.Screen name="Pokedex" component={PokedexScreen} />
+      <Tab.Screen name="Pokedex" component={PokedexScreen} options={{ title: 'My Pokédex' }} />
       <Tab.Screen name="My Team" component={TeamScreen} />
       <Tab.Screen name="Game" component={GameScreen} />
     </Tab.Navigator>
@@ -39,11 +48,17 @@ function Tabs() {
 
 export default function App() {
   return (
+    <TeamProvider>
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{
+        headerStyle: { backgroundColor: colors.green },
+        headerTintColor: colors.surface,
+        headerTitleStyle: { fontWeight: '700', letterSpacing: 0.2 },
+      }}>
         <Stack.Screen name="Home" component={Tabs} options={{ headerShown: false }} />
         <Stack.Screen name="Detail" component={DetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
+    </TeamProvider>
   );
 }

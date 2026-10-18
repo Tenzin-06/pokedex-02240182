@@ -41,3 +41,22 @@ export async function fetchAllPokemon() {
         };
     });
 }
+
+export async function fetchPokemonDetails(id) {
+    const response = await fetch(`${BASE_URL}/pokemon/${id}`);
+
+    if (!response.ok) {
+        throw new Error('Request failed with status ' + response.status);
+    }
+
+    const data = await response.json();
+    return {
+        id: data.id,
+        name: data.name,
+        image: getArtworkUrl(data.id),
+        types: data.types.map((t) => t.type.name),
+        height: data.height /10,
+        weight: data.weight /10,
+        stats: data.stats.map((s) => ({ name: s.stat.name, value: s.base_stat })),
+    };
+}
