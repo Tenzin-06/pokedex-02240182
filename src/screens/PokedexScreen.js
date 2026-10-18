@@ -148,7 +148,7 @@ export default function PokedexScreen({ navigation }) {
     <View style={styles.screen}>
         <View style={styles.intro}>
           <Text style={styles.eyebrow}>NATIONAL DEX  ·  SPECIES LIST</Text>
-          <Text style={styles.introTitle}>Browse Pokémon</Text>
+          <Text style={styles.introTitle}>Hello, Tenzin Tobgay</Text>
         </View>
         <View style={styles.searchWrap}>
             <Ionicons name="search" size={19} color={colors.muted} />
